@@ -1,0 +1,25 @@
+
+.card {
+    margin: 50px;
+    background-color: rgba(246, 246, 246, 0.924);
+}
+
+.card-footer {
+    padding: 5px;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.alert {
+    margin: 5px;
+}
+
+.progress {
+    margin: 5px;
+}
+
+.navbar {
+    background-color: rgba(246, 246, 246, 0.924);
+}
