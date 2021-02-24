@@ -19,6 +19,7 @@ class reddit():
 
         try:
             print(posts['error'])
+            return(to_return)
         except KeyError:
             pass
 
