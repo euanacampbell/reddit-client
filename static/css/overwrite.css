@@ -2,7 +2,10 @@
 .card {
     margin: 5px;
     background-color: rgba(246, 246, 246, 0.924);
-    padding: 5px;
+}
+
+div.card-body {
+    padding: 10px;
 }
 
 p {
@@ -23,4 +26,8 @@ p {
 
 a.navbar-brand {
     padding-left: 5px;
+}
+
+div.card-footer {
+    padding: 10px;
 }
