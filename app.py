@@ -7,11 +7,18 @@ redt = reddit()
 @app.route('/home')
 def home():
 
-    posts=redt.get_workspaces()
+    posts=redt.get_subreddit('')
 
     posts=posts + posts
     return render_template('index.html', posts=posts)
-    # return render_template('index.html')
+
+@app.route('/<subreddit>')
+def subreddit(subreddit):
+
+    posts=redt.get_subreddit(subreddit)
+
+    posts=posts + posts
+    return render_template('index.html', posts=posts)
 
 @app.route('/debug-sentry')
 def trigger_error():

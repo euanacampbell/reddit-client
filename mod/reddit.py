@@ -12,9 +12,15 @@ class reddit():
     def get_comments(self):
         pass
 
-    def get_workspaces(self):
+    def get_subreddit(self, subreddit):
         to_return=[]
-        posts = self.api.get_hot_posts_for_subreddit('pcmasterrace')
+        posts = self.api.get_hot_posts_for_subreddit(subreddit)
+        print(posts)
+
+        try:
+            print(posts['error'])
+        except KeyError:
+            pass
 
         for post in posts['data']['children']:
             if post['data']['pinned']==False:
