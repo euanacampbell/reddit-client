@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, url_for
 from mod.reddit import reddit
 
 app = Flask(__name__)
@@ -22,7 +22,7 @@ def trigger_error():
 @app.errorhandler(404)
 def page_not_found(e):
 
-    return redirect("http://127.0.0.1:5000/home", code=302)
+    return redirect(url_for('home'))
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
