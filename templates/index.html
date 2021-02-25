@@ -38,46 +38,49 @@
         <div class="row">
           {% for post in posts: %}
             <div class="col-sm-6 col-lg-4 col-xl-3">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">{{ post['title'] }}</h5>
-                  <p class="card-text">{{ post['text'] }}</p>
-                  {% if  '.jpg' in post['img_url'] or '.png' in post['img_url'] %}
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                      <div class="carousel-inner">
-                        <div class="carousel-item active">
-                          <img class="d-block w-100" src={{ post['img_url'] }} alt="First slide">
+              <!---<a href="https://google.co.uk" class="custom-card">-->
+                <div class="card">
+                  <div class="card-body">
+                    <a href={{ post['post_url'] }} class="stretched-link"></a>
+                    <h5 class="card-title">{{ post['title'] }}</h5>
+                    <p class="card-text">{{ post['text'] }}</p>
+                    {% if  '.jpg' in post['img_url'] or '.png' in post['img_url'] %}
+                      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img class="d-block w-100" src={{ post['img_url'] }} alt="First slide">
+                          </div>
                         </div>
+                        {% if  post['img_url'] | length > 1 %}
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only"></span>
+                        </a>
+                        {% endif %}
                       </div>
-                      {% if  post['img_url'] | length > 1 %}
-                      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only"></span>
-                      </a>
-                      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only"></span>
-                      </a>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                </div>
+                    {% endif %}
+                  </div>
 
-                <div class="card-footer text-muted">
-                  <!--subreddit-->
-                  <span class="subreddit card-text">r/{{ post['subreddit'] }}</span>
-                  &nbsp; &nbsp;
-                  <!--upvotes-->
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-square-fill" viewBox="0 0 16 16">
-                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4 9h8a.5.5 0 0 0 .374-.832l-4-4.5a.5.5 0 0 0-.748 0l-4 4.5A.5.5 0 0 0 4 11z"/>
-                  </svg> {{ post['upvotes'] }}
-                  &nbsp; &nbsp;
-                  <!--comments-->
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-fill" viewBox="0 0 16 16">
-                    <path d="M14 0a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
-                  </svg> {{ post['num_comments'] }}
+                  <div class="card-footer text-muted">
+                    <!--subreddit-->
+                    <span class="subreddit card-text">r/{{ post['subreddit'] }}</span>
+                    &nbsp; &nbsp;
+                    <!--upvotes-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-square-fill" viewBox="0 0 16 16">
+                      <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4 9h8a.5.5 0 0 0 .374-.832l-4-4.5a.5.5 0 0 0-.748 0l-4 4.5A.5.5 0 0 0 4 11z"/>
+                    </svg> {{ post['upvotes'] }}
+                    &nbsp; &nbsp;
+                    <!--comments-->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-fill" viewBox="0 0 16 16">
+                      <path d="M14 0a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+                    </svg> {{ post['num_comments'] }}
+                  </div>
                 </div>
-              </div>
+              <!---</a>-->
             </div>
           {% endfor %}
         </div>

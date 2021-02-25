@@ -32,20 +32,45 @@ class reddit():
                 new_post['num_comments']="{:,}".format(data['num_comments'])
                 new_post['upvotes']="{:,}".format(data['ups'])
                 new_post['subreddit']=data['subreddit']
-                new_post['name']=data['name']
+                new_post['name']=data['id']
+                new_post['post_url']=f"/{data['subreddit']}/{data['id']}"
 
                 new_post['img_url']=data['url']             
 
                 to_return.append(new_post)
         return(to_return)
     
-    def get_post_data(self, id):
-        pass
+    def get_post_data(self, post_id):
+        print("get post data")
+
+        post={}
+        data = self.api.get_post_details(post_id)[0]
+        data = data['data']['children'][0]['data']
+        print("DATA")
+        print(data)
+
+        post['title']=data['title']
+        if len(data['selftext']) >= 300:
+            post['text']=data['selftext'][0:300] + " ..."
+        else:
+            post['text']=data['selftext']
+        post['text_full']=data['selftext']
+        post['num_comments']="{:,}".format(data['num_comments'])
+        post['upvotes']="{:,}".format(data['ups'])
+        post['subreddit']=data['subreddit']
+        post['name']=data['id']
+        post['post_url']=f"/{data['subreddit']}/{data['name']}"
+
+        post['img_url']=data['url']
+
+        return(post)
 
 
 if __name__=="__main__":
     app = reddit()
     print('')
-    response = app.get_workspaces()
+    response = app.get_post_data('lrzhvb')
+
+    print(response)
 
     # print(response)

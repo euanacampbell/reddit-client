@@ -32,7 +32,8 @@ class reddit_api():
 
     def make_api_call(self, url):
         resp = requests.get(url, headers=self.headers)
-        print(resp)
+        print(resp.status_code)
+        print(resp.json)
         resp = resp.json()
         return(resp)
 
@@ -76,11 +77,19 @@ class reddit_api():
 
     def get_comments(self, subreddit, name):
         resp = self.make_api_call(f'{self.base}/r/{subreddit}/comments/{name}')
-        resp = resp.json()
+
         return(resp)
     
     def get_post_details(self, name):
-        pass
+        print("api - get post details")
+         
+        url=f'https://www.reddit.com/comments/{name}.json'
+        resp = requests.get(url, headers = {'User-agent': 'your bot 0.1'})
+        print(resp.status_code)
+        print(url)
+        resp = resp.json()
+        return(resp)
+
     
 
 if __name__=="__main__":
