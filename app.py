@@ -17,7 +17,7 @@ def subreddit(subreddit):
 
     posts=reddit.get_subreddit(subreddit)
 
-    posts=posts + posts
+    posts=posts
     return render_template('index.html', posts=posts)
 
 @app.route('/<subreddit>/<post_id>')

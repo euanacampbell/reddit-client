@@ -38,7 +38,8 @@ class reddit():
 
         for post in posts:
             if post.stickied != True:
-                posts_formatted.append(self.get_dict_from_sub(post))      
+                posts_formatted.append(self.get_dict_from_sub(post))
+         
         return(posts_formatted)
     
     def get_post_data(self, post_id):
@@ -54,7 +55,7 @@ if __name__=="__main__":
 
     app = reddit()
     print('')
-    response = app.get_post_data('ls7qih')
+    response = app.get_comments('lrks0g')
 
     for i in response:
         print(i)

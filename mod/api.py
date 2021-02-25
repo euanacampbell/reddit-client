@@ -44,7 +44,10 @@ class reddit_api():
                 continue
             comment['text']=top_level_comment.body
             comment['replies']=top_level_comment.replies
-            comment['author']=top_level_comment.author.name
+            try:
+                comment['author']=top_level_comment.author.name
+            except AttributeError:
+                comment['author']=''
 
             comments.append(comment)
 
