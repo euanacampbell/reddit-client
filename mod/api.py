@@ -1,7 +1,6 @@
 import os
 import praw
 from praw.models import MoreComments
-import pandas as pd
 
 class reddit_api():
 
