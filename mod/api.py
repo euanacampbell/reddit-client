@@ -20,7 +20,7 @@ class reddit_api():
         """Returns dictionary hot posts for a particular subreddit"""
         response = self.reddit.subreddit(subreddit)
         
-        return(response.hot(limit=10))
+        return(response.hot(limit=30))
 
 
     def get_subreddit_about(self, subreddit=None):
