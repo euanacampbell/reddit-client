@@ -7,9 +7,7 @@ redt = reddit()
 @app.route('/home')
 def home():
 
-    posts=redt.get_subreddit('')
-
-    posts=posts + posts
+    posts=[]
     return render_template('index.html', posts=posts)
 
 @app.route('/<subreddit>')
