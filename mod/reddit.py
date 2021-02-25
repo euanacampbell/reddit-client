@@ -16,11 +16,8 @@ class reddit():
         to_return=[]
         posts = self.api.get_hot_posts_for_subreddit(subreddit)
 
-        try:
-            print(posts['error'])
+        if len(posts)==0:
             return(to_return)
-        except KeyError:
-            pass
 
         for post in posts['data']['children']:
             if post['data']['pinned']==False:
@@ -41,6 +38,9 @@ class reddit():
 
                 to_return.append(new_post)
         return(to_return)
+    
+    def get_post_data(self, id):
+        pass
 
 
 if __name__=="__main__":

@@ -17,6 +17,13 @@ def subreddit(subreddit):
 
     posts=posts + posts
     return render_template('index.html', posts=posts)
+"""
+@app.route('/<postid>')
+def post(postid):
+
+    postdetails = redt.get_post_data(postid)
+    return render_template('post.html', posts=post_data)
+"""
 
 @app.route('/debug-sentry')
 def trigger_error():
@@ -31,4 +38,4 @@ def page_not_found(e):
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    app.run(debug=True, host='127.0.0.1', port=5010)

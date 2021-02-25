@@ -29,12 +29,18 @@ class reddit_api():
 
         # add authorization to our headers dictionary
         self.headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
+
+    def make_api_call(self, url):
+        resp = requests.get(url, headers=self.headers)
+        print(resp)
+        resp = resp.json()
+        return(resp)
+
     
     def get_details_about_me(self):
         # while the token is valid (~2 hours) we just add headers=headers to our requests
-        resp = requests.get(f'{self.base}api/v1/me', headers=self.headers)
+        resp = self.make_api_call(f'{self.base}api/v1/me')
 
-        resp = resp.json()
         print(resp)
         
     
@@ -43,16 +49,14 @@ class reddit_api():
         if subreddit==None:
             return("")
         else:
-            resp = requests.get(f'{self.base}/r/{subreddit}/hot',
-                            headers=self.headers)
-            resp = resp.json()
+            resp = self.make_api_call(f'{self.base}/r/{subreddit}/hot')
+
             return(resp)
 
     def get_trending_subreddits(self):
         """Returns a list of 5 trending subreddits"""
-        res = requests.get('https://reddit.com/api/trending_subreddits.json',
-                        headers=self.headers)
-        res = res.json()
+        res = self.make_api_call('https://reddit.com/api/trending_subreddits.json')
+
         print(res['subreddit_names'])
 
     def get_subreddit_about(self, subreddit=None):
@@ -60,9 +64,8 @@ class reddit_api():
         if subreddit==None:
             return("")
         else:
-            resp = requests.get(f'{self.base}/r/{subreddit}/about',
-                            headers=self.headers)
-            resp = resp.json()
+            resp = self.make_api_call(f'{self.base}/r/{subreddit}/about')
+
             return(resp)
     
     def get_my_home(self):
@@ -72,10 +75,13 @@ class reddit_api():
         return(resp)
 
     def get_comments(self, subreddit, name):
-        resp = requests.get(f'{self.base}/r/{subreddit}/comments/{name}',
-                            headers=self.headers)
+        resp = self.make_api_call(f'{self.base}/r/{subreddit}/comments/{name}')
         resp = resp.json()
         return(resp)
+    
+    def get_post_details(self, name):
+        pass
+    
 
 if __name__=="__main__":
     api = reddit_api()
