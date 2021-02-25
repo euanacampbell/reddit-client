@@ -42,8 +42,31 @@
                     <div class="container">
                     <h1 class="display-4">{{ post['title'] }}</h1>
                     <p class="lead">{{ post['text_full'] }}</p>
-                    </div>
+                    {% if  '.jpg' in post['img_url'] or '.png' in post['img_url'] %}
+                      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img class="d-block w-100" src={{ post['img_url'] }} alt="First slide">
+                          </div>
+                        </div>
+                        {% if  post['img_url'] | length > 1 %}
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only"></span>
+                        </a>
+                        {% endif %}
+                      </div>
+                    {% endif %}
                 </div>
+                <ul class="list-group list-group-flush">
+                    {% for comment in comments: %}
+                        <li class="list-group-item disabled">{{ comment['text'] }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </body>

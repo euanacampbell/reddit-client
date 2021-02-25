@@ -1,7 +1,9 @@
 from flask import Flask, render_template, redirect, url_for
 from mod.reddit import reddit
 
+
 app = Flask(__name__)
+
 reddit = reddit()
 
 @app.route('/home')
@@ -18,12 +20,13 @@ def subreddit(subreddit):
     posts=posts + posts
     return render_template('index.html', posts=posts)
 
-@app.route('/<subreddit>/<postid>')
-def post(subreddit, postid):
+@app.route('/<subreddit>/<post_id>')
+def post(subreddit, post_id):
 
 
-    post = reddit.get_post_data(postid)
-    return render_template('post.html', post=post)
+    post = reddit.get_post_data(post_id)
+    comments = reddit.get_comments(post_id)
+    return render_template('post.html', post=post, comments=comments)
 
 
 @app.route('/debug-sentry')

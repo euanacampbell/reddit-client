@@ -1,107 +1,64 @@
-"""will call the api"""
-import requests
 import os
-
+import praw
+from praw.models import MoreComments
+import pandas as pd
 
 class reddit_api():
 
     def __init__(self):
 
-        self.base="https://oauth.reddit.com/"
-        # note that CLIENT_ID refers to 'personal use script' and SECRET_TOKEN to 'token'
-
-        auth = requests.auth.HTTPBasicAuth(os.environ.get('auth1'), os.environ.get('auth2'))
-
-        # here we pass our login method (password), username, and password
-        data = {'grant_type': 'password',
-                'username': os.environ.get('username'),
-                'password': os.environ.get('password')}
-
-        # setup our header info, which gives reddit a brief description of our app
-        headers = {'User-Agent': 'MyBot/0.0.1'}
-
-        # send our request for an OAuth token
-        res = requests.post('https://www.reddit.com/api/v1/access_token',
-                            auth=auth, data=data, headers=headers)
-
-        # convert response to JSON and pull access_token value
-        TOKEN = res.json()['access_token']
-
-        # add authorization to our headers dictionary
-        self.headers = {**headers, **{'Authorization': f"bearer {TOKEN}"}}
-
-    def make_api_call(self, url):
-        resp = requests.get(url, headers=self.headers)
-        print(resp.status_code)
-        print(resp.json)
-        resp = resp.json()
-        return(resp)
-
-    
-    def get_details_about_me(self):
-        # while the token is valid (~2 hours) we just add headers=headers to our requests
-        resp = self.make_api_call(f'{self.base}api/v1/me')
-
-        print(resp)
+        self.reddit = praw.Reddit(
+            client_id=os.environ.get('auth1'),
+            client_secret=os.environ.get('auth2'),
+            password=os.environ.get('password'),
+            user_agent="testscript for reddit",
+            redirect_uri="http://localhost:8080",
+            username=os.environ.get('username'),
+        )
         
     
     def get_hot_posts_for_subreddit(self, subreddit=None):
         """Returns dictionary hot posts for a particular subreddit"""
-        if subreddit==None:
-            return("")
-        else:
-            resp = self.make_api_call(f'{self.base}/r/{subreddit}/hot')
+        response = self.reddit.subreddit(subreddit)
+        
+        return(response.hot(limit=10))
 
-            return(resp)
-
-    def get_trending_subreddits(self):
-        """Returns a list of 5 trending subreddits"""
-        res = self.make_api_call('https://reddit.com/api/trending_subreddits.json')
-
-        print(res['subreddit_names'])
 
     def get_subreddit_about(self, subreddit=None):
         """Returns dictionary hot posts for a particular subreddit"""
-        if subreddit==None:
-            return("")
-        else:
-            resp = self.make_api_call(f'{self.base}/r/{subreddit}/about')
-
-            return(resp)
-    
-    def get_my_home(self):
         
-        resp = requests.get('http://www.reddit.com/.json', headers = {'User-agent': 'your bot 0.1'})
-        resp = resp.json()
-        return(resp)
+        response = self.reddit.subreddit(subreddit)
 
-    def get_comments(self, subreddit, name):
-        resp = self.make_api_call(f'{self.base}/r/{subreddit}/comments/{name}')
+        return(response.description)
 
-        return(resp)
+    def get_comments(self, name):
+        comments=[]
+        submission = self.reddit.submission(id=name)
+
+        submission.comment_sort = 'best'
+        submission.comment_limit = 15
+        print(len(submission.comments))
+
+        for top_level_comment in submission.comments:
+            comment={}
+            if isinstance(top_level_comment, MoreComments) or top_level_comment.stickied==True:
+                continue
+            comment['text']=top_level_comment.body
+            comment['replies']=top_level_comment.replies
+            comment['author']=top_level_comment.author.name
+
+            comments.append(comment)
+
+        return(comments)
     
     def get_post_details(self, name):
-        print("api - get post details")
          
-        url=f'https://www.reddit.com/comments/{name}.json'
-        resp = requests.get(url, headers = {'User-agent': 'your bot 0.1'})
-        print(resp.status_code)
-        print(url)
-        resp = resp.json()
-        return(resp)
+        submission = self.reddit.submission(id=name)
+        return(submission)  # to make it non-lazy
 
     
 
 if __name__=="__main__":
     api = reddit_api()
     print('')
-    response = api.get_comments('pcmasterrace', 'lr5t9v')
-
-    print(response)
-
-
-
-
-
-
-
+    response = api.get_post_details('ls7qih')
