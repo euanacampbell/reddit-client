@@ -15,7 +15,6 @@ class reddit():
     def get_subreddit(self, subreddit):
         to_return=[]
         posts = self.api.get_hot_posts_for_subreddit(subreddit)
-        print(posts)
 
         try:
             print(posts['error'])
