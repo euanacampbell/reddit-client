@@ -65,7 +65,7 @@
                 </div>
               {% endif %}
               </div>
-              <div class="card-footer">
+              <div class="card-footer text-muted">
                 <p>in <b>r/{{ post['subreddit'] }}</b> by <b>u/{{ post['author'] }}</b></p>
                 <p>
                   <!--UPVOTES-->
@@ -90,10 +90,20 @@
           </div>
         </div>
 
-        <ul class="list-group list-group-flush">
-          {% for comment in comments: %}
-              <li class="list-group-item disabled">{{ comment['text'] }}</li>
-          {% endfor %}
-        </ul>
+        <div class="row">
+          <div class="col-sm-12">
+            {% for comment in comments: %}
+              <div class="card">
+                <div class="card-body">
+                  <p><b>{{ comment['author'] }}</b>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+                  </svg>{{ comment['score'] }}</p>
+                  <p>{{ comment['text'] }}</p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
     </body>
 </html>

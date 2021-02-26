@@ -22,6 +22,12 @@ class reddit():
             if isinstance(top_level_comment, MoreComments) or top_level_comment.stickied==True:
                 continue
             comment['text']=top_level_comment.body
+            if float(top_level_comment.score) > 999:
+                number=float(top_level_comment.score)/1000
+                comment['score']=str("{:.1f}".format(number)) + 'K'
+            else:
+                comment['score']=str(top_level_comment.score)
+
             comment['replies']=top_level_comment.replies
             try:
                 comment['author']=top_level_comment.author.name
@@ -41,7 +47,11 @@ class reddit():
             post['text']=submission.selftext
         post['text_full']=submission.selftext
         post['num_comments']="{:,}".format(submission.num_comments)
-        post['upvotes']="{:,}".format(submission.score)
+        if float(submission.score) > 999:
+            number=float(submission.score)/1000
+            post['upvotes']=str("{:.1f}".format(number)) + 'K'
+        else:
+            post['upvotes']=str(submission.score)
         post['upvote_ratio']=submission.upvote_ratio
         post['subreddit']=submission.subreddit
         post['name']=submission.id
