@@ -45,9 +45,11 @@
             <div class="col-sm-6 col-lg-4 col-xl-3">
               <!---<a href="https://google.co.uk" class="custom-card">-->
                 <div class="card">
+                  <div class="card-header">
+                    <h5 class="card-title">{{ post['title'] }}</h5>
+                  </div>
                   <div class="card-body">
                     <a href={{ post['post_url'] }} class="stretched-link"></a>
-                    <h5 class="card-title">{{ post['title'] }}</h5>
                     <p class="card-text">{{ post['text'] }}</p>
                     {% if  '.jpg' in post['img_url'] or '.png' in post['img_url'] %}
                       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
