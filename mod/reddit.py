@@ -1,6 +1,6 @@
 """Will call the api module and handle data coming back. Will be called by app.py"""
 from mod.api import reddit_api
-
+from praw.models import MoreComments
 
 class reddit():
 
@@ -11,7 +11,26 @@ class reddit():
         pass
 
     def get_comments(self, post_id):
-        return(self.api.get_comments(post_id))
+        comments=[]
+        submission_comments = self.api.get_comments(post_id)
+
+        submission_comments.comment_sort = 'best'
+        submission_comments.comment_limit = 15
+
+        for top_level_comment in submission_comments:
+            comment={}
+            if isinstance(top_level_comment, MoreComments) or top_level_comment.stickied==True:
+                continue
+            comment['text']=top_level_comment.body
+            comment['replies']=top_level_comment.replies
+            try:
+                comment['author']=top_level_comment.author.name
+            except AttributeError:
+                comment['author']=''
+
+            comments.append(comment)
+
+        return(comments)
 
     def get_dict_from_sub(self, submission):
         post={}
@@ -23,9 +42,11 @@ class reddit():
         post['text_full']=submission.selftext
         post['num_comments']="{:,}".format(submission.num_comments)
         post['upvotes']="{:,}".format(submission.score)
+        post['upvote_ratio']=submission.upvote_ratio
         post['subreddit']=submission.subreddit
         post['name']=submission.id
         post['post_url']=f"/r/{submission.subreddit}/{submission.id}"
+        post['author']=submission.author.name
 
         post['img_url']=submission.url
 

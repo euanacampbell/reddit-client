@@ -1,6 +1,5 @@
 import os
 import praw
-from praw.models import MoreComments
 
 class reddit_api():
 
@@ -31,27 +30,10 @@ class reddit_api():
         return(response.description)
 
     def get_comments(self, name):
-        comments=[]
+
         submission = self.reddit.submission(id=name)
 
-        submission.comment_sort = 'best'
-        submission.comment_limit = 15
-        print(len(submission.comments))
-
-        for top_level_comment in submission.comments:
-            comment={}
-            if isinstance(top_level_comment, MoreComments) or top_level_comment.stickied==True:
-                continue
-            comment['text']=top_level_comment.body
-            comment['replies']=top_level_comment.replies
-            try:
-                comment['author']=top_level_comment.author.name
-            except AttributeError:
-                comment['author']=''
-
-            comments.append(comment)
-
-        return(comments)
+        return(submission.comments)
     
     def get_post_details(self, name):
          
