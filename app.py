@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from mod.reddit import reddit
 
 
@@ -14,10 +14,9 @@ def home():
 
 @app.route('/login')
 def login():
-
     return render_template('login.html')
 
-@app.route('/<subreddit>')
+@app.route('/r/<subreddit>')
 def subreddit(subreddit):
 
     posts=reddit.get_subreddit(subreddit)
@@ -25,7 +24,7 @@ def subreddit(subreddit):
     posts=posts
     return render_template('index.html', posts=posts)
 
-@app.route('/<subreddit>/<post_id>')
+@app.route('/r/<subreddit>/<post_id>')
 def post(subreddit, post_id):
 
 
