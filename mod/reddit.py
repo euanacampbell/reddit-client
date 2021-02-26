@@ -22,6 +22,7 @@ class reddit():
             if isinstance(top_level_comment, MoreComments) or top_level_comment.stickied==True:
                 continue
             comment['text']=top_level_comment.body
+            comment['id']=top_level_comment.id
             if float(top_level_comment.score) > 999:
                 number=float(top_level_comment.score)/1000
                 comment['score']=str("{:.1f}".format(number)) + 'K'
