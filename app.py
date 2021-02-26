@@ -12,6 +12,11 @@ def home():
     posts=[]
     return render_template('index.html', posts=posts)
 
+@app.route('/login')
+def login():
+
+    return render_template('login.html')
+
 @app.route('/<subreddit>')
 def subreddit(subreddit):
 
@@ -38,7 +43,7 @@ def trigger_error():
 @app.errorhandler(404)
 def page_not_found(e):
 
-    return redirect(url_for('home'))
+    return redirect(url_for('login'))
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
