@@ -25,7 +25,7 @@ class reddit():
         post['upvotes']="{:,}".format(submission.score)
         post['subreddit']=submission.subreddit
         post['name']=submission.id
-        post['post_url']=f"/{submission.subreddit}/{submission.id}"
+        post['post_url']=f"/r/{submission.subreddit}/{submission.id}"
 
         post['img_url']=submission.url
 

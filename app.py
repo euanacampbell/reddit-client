@@ -12,8 +12,14 @@ def home():
     posts=[]
     return render_template('index.html', posts=posts)
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+
+    if request.data:
+        return redirect(url_for('home'))
+    else:
+        return render_template('login.html')
+
     return render_template('login.html')
 
 @app.route('/r/<subreddit>')
