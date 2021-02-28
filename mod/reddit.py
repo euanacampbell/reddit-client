@@ -77,7 +77,8 @@ class reddit():
         else:
             post['media']={
                 'type': 'link',
-                'link_url': submission.url
+                'link_url': submission.url,
+                'link_domain': submission.url.split('/')[2]
             }
 
         return(post)

@@ -21,10 +21,10 @@
     <body>
         <!--NAV BAR-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="col-sm-4 col-lg-4 col-xl-3">
-            <a class="navbar-brand" href="/">REDDIT r/{{ subreddit }}</a>
+          <div class="col-sm-6">
+            <a class="navbar-brand" href="/">REDDIT</a>
           </div>
-          <div class="col-sm-8 col-lg-4 col-xl-3">
+          <div class="col-sm-6">
             <div class="input-group">
               <input id="subredditSearch" class="form-control me-2" type="search" placeholder="subreddit" aria-label="Search">
               <span class="input-group-btn">
@@ -41,8 +41,9 @@
                 <form class="d-flex search">
                   <input class="form-control me-2" type="search" placeholder="subreddit" aria-label="Search">
                   <button class="btn btn-dark" type="submit" href="https://google.co.uk">GO</button>
-                </form>
-            </div>-->
+                </form>-->
+            </div>
+          </div>
         </nav>
         <!--END OF NAV BAR-->
 
@@ -87,7 +88,7 @@
                         <div class="col-md-12">
                            <div class="card link-card flex-md-row mb-4 shadow-sm h-md-250">
                               <div class="card-body d-flex flex-column align-items-start">
-                                 <a target="_blank" href="{{ post['media'].link_url }}"><strong class="d-inline-block mb-2 text-primary">{{ post['media'].link_url }}</strong></a>
+                                 <a target="_blank" href="{{ post['media'].link_url }}"><strong class="d-inline-block mb-2 text-primary">{{ post['media'].link_domain }}</strong></a>
                                  <h6 class="mb-0">
                                     <a class="text-dark" href="{{ post['media'].link_url }}"></a>
                                  </h6>
