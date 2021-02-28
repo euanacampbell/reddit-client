@@ -1,13 +1,28 @@
 
+body {
+    background-color: rgb(241, 241, 241);
+}
+
 .card {
-    
     background-color: rgb(255, 255, 255)!important;
+}
+
+.card.summary-post {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-radius: 0 !important;
 }
 
 .card.postheader {
     margin: 0px;
     border-radius: 0 !important;
     border: 0px;
+}
+
+.card.post-footer {
+    font-size: xx-small;
 }
 
 .card.comment {
