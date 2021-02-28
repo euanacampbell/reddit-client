@@ -6,6 +6,10 @@ app = Flask(__name__)
 
 reddit = reddit()
 
+@app.route('/')
+def home():
+    return redirect(url_for('popular'))
+
 @app.route('/popular')
 def popular():
     default='popular'
@@ -47,7 +51,7 @@ def trigger_error():
 @app.errorhandler(404)
 def page_not_found(e):
 
-    return redirect(url_for('login'))
+    return redirect(url_for('popular'))
 
 # start the server with the 'run()' method
 if __name__ == '__main__':

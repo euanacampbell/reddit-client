@@ -16,26 +16,28 @@
         <link href="https://euancampbell-portfolio.herokuapp.com/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" href="https://euancampbell-portfolio.herokuapp.com/static/css/overwrite.css">
         <link rel="stylesheet" href="http://127.0.0.1:5000/static/css/overwrite.css">
+        <script type="text/javascript" src="http://127.0.0.1:5000/static/js/overwrite.js"></script>
     </head>
     <body>
         <!--NAV BAR-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/home">REDDIT r/{{ subreddit }}</a>
+            <a class="navbar-brand" href="/home">REDDIT</a>
+            <form class="d-flex search">
+              <input id="subredditSearch" class="form-control me-2" type="search" placeholder="subreddit" aria-label="Search">
+              <button onclick="goToSubreddit()" class="btn btn-dark">GO</button>
+            </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
             </button>
+            <!--
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                <!--<li class="nav-item">
-                    <a class="nav-link" href="https://info.euan.app" target="_blank">PORTFOLIO</a>
-                </li>-->
                 </ul>
-                <!--SEARCH-->
                 <form class="d-flex search">
                   <input class="form-control me-2" type="search" placeholder="subreddit" aria-label="Search">
                   <button class="btn btn-dark" type="submit" href="https://google.co.uk">GO</button>
                 </form>
-            </div>
+            </div>-->
         </nav>
         <!--END OF NAV BAR-->
 
