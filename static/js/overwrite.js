@@ -4,6 +4,5 @@ function goToSubreddit(){
     var baseURL = '/r/';
 
     var url = baseURL.concat(inputVal)
-    alert(url);
     window.location.href = url;
 }
