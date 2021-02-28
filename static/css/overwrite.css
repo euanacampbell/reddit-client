@@ -1,12 +1,27 @@
 
 .card {
+    
+    background-color: rgb(255, 255, 255)!important;
+}
+
+.card.postheader {
+    margin: 0px;
+    border-radius: 0 !important;
+    border: 0px;
+}
+
+.card.comment {
     margin: 5px;
-    background-color: rgb(255, 255, 255);
 }
 
 div.card-body {
     padding: 10px;
 }
+
+.comment-header { 
+    color: inherit;
+    text-decoration: none;
+}   
 
 p {
     margin-bottom: 0;
@@ -28,8 +43,24 @@ a.navbar-brand {
     padding-left: 5px;
 }
 
-div.card-footer {
+.card-footer {
     padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 0px;
+}
+
+.link-card {
+    margin: 5px;
+    margin-bottom: 0rem!important;
+}
+
+.card-header {
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+}
+
+.comment-header {
+    padding: 0px;
 }
 
 a.custom-card,

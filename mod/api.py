@@ -4,7 +4,6 @@ import praw
 class reddit_api():
 
     def __init__(self):
-
         self.reddit = praw.Reddit(
             client_id=os.environ.get('auth1'),
             client_secret=os.environ.get('auth2'),
@@ -19,7 +18,7 @@ class reddit_api():
         """Returns dictionary hot posts for a particular subreddit"""
         response = self.reddit.subreddit(subreddit)
         
-        return(response.hot(limit=30))
+        return(response.hot(limit=10))
 
 
     def get_subreddit_about(self, subreddit=None):
@@ -39,6 +38,13 @@ class reddit_api():
          
         submission = self.reddit.submission(id=name)
         return(submission)  # to make it non-lazy
+    
+    def get_front_page(self):
+        page = self.reddit.redditor("doctorrono").submissions.hot().data
+
+        print(type(page))
+
+        return(page)
 
     
 

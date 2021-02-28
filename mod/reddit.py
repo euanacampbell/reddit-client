@@ -1,5 +1,6 @@
 """Will call the api module and handle data coming back. Will be called by app.py"""
 from mod.api import reddit_api
+from linkpreview import link_preview
 from praw.models import MoreComments
 
 class reddit():
@@ -7,8 +8,10 @@ class reddit():
     def __init__(self):
         self.api = reddit_api()
 
-    def get_homepage_content(self):
-        pass
+    def get_frontpage(self):
+        page = self.api.get_front_page()
+
+        print(page)
 
     def get_comments(self, post_id):
         comments=[]
@@ -59,7 +62,26 @@ class reddit():
         post['post_url']=f"/r/{submission.subreddit}/{submission.id}"
         post['author']=submission.author.name
 
-        post['img_url']=submission.url
+        post['media_url']=submission.url
+
+        if submission.url.endswith(('.jpg', '.png')):
+            print('IMAGE')
+            post['media']={
+                'type': 'image',
+                'media_url': submission.url
+            }
+        else:
+            try:
+                print('LINK')
+                preview = link_preview(submission.url)
+                post['media']={
+                    'type': 'link',
+                    'media_url': preview.image,
+                    'link_title': preview.title,
+                    'link_url': submission.url
+                }
+            except:
+                pass
 
         return(post)
 
@@ -87,7 +109,7 @@ if __name__=="__main__":
 
     app = reddit()
     print('')
-    response = app.get_comments('lrks0g')
+    response = app.get_post_data('lt7tnd')
 
     for i in response:
-        print(i)
+        print(f"{i}: {response[i]}")

@@ -40,21 +40,22 @@
         <!--POST (NEW)-->
         <div class="row">
           <div class="col-sm-12">
-            <div class="card">
+            <div class="card postheader">
               <div class="card-header">
                 <h5 class="card-title">{{ post['title'] }}</h5>
               </div>
               <div class="card-body">
                 <p class="card-text">{{ post['text'] }}</p>
+                
                 <!--IMAGE-->
-                {% if  '.jpg' in post['img_url'] or '.png' in post['img_url'] %}
+                {% if  post.media.type=='image' %}
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <img class="d-block w-100" src={{ post['img_url'] }} alt="First slide">
+                      <img class="d-block w-100" src={{ post['media_url'] }} alt="First slide">
                     </div>
                   </div>
-                  {% if  post['img_url'] | length > 1 %}
+                  {% if  post['media_url'] | length > 1 %}
                   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only"></span>
@@ -63,10 +64,31 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only"></span>
                   </a>
-                  {% endif %}
+                {% endif %}
                 </div>
+                <!--END OF IMAGE-->
+
+                <!--LINK-->
+                {% elif  post.media.type=='link' %}
+                  <p class="card-text">{{ post['text'] }}</p>
+                  <div class="row">
+                    <div class="col-md-12">
+                       <div class="card link-card flex-md-row mb-4 shadow-sm h-md-250">
+                          <div class="card-body d-flex flex-column align-items-start">
+                             <a target="_blank" href="{{ post['media'].link_url }}"><strong class="d-inline-block mb-2 text-primary">{{ post['media'].link_title }}</strong></a>
+                             <h6 class="mb-0">
+                                <a class="text-dark" href="{{ post['media'].link_url }}"></a>
+                             </h6>
+                          </div>
+                          <img class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="{{ post['media'].media_url }}" style="width: 200px; height: 250px;">
+                       </div>
+                    </div>
+                  </div>
+                <!--END OF LINK-->
               {% endif %}
               </div>
+              
+              <!--FOOTER-->
               <div class="card-footer text-muted">
                 <p>in <b>r/{{ post['subreddit'] }}</b> by <b>u/{{ post['author'] }}</b></p>
                 <p>
@@ -88,17 +110,22 @@
                   </svg>
                 </p>
               </div>
+              <!--END OF FOOTER-->
+
             </div>
+            <!--END OF CARD-->
           </div>
+          <!--END OF COLUMN-->
         </div>
+        <!--END OF ROW-->
         
         <!--COMMENTS-->
         <div class="accordion" id="accordionExample">
           {% for comment in comments: %}
-          <div class="card">
+          <div class="card comment">
             <div class="card-header" id="heading{{ comment['id'] }}">
               <h5 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ comment['id'] }}" aria-expanded="true" aria-controls="collapse{{ comment['id'] }}">
+                <button class="btn btn-link comment-header" type="button" data-toggle="collapse" data-target="#collapse{{ comment['id'] }}" aria-expanded="true" aria-controls="collapse{{ comment['id'] }}">
                   <p><b>{{ comment['author'] }}</b>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
@@ -115,22 +142,6 @@
           </div>
           {% endfor %}
         </div>
-        <!--END OF COMMENDS-->
-
-        <div class="row">
-          <div class="col-sm-12">
-            {% for comment in comments: %}
-              <div class="card">
-                <div class="card-body">
-                  <p><b>{{ comment['author'] }}</b>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
-                  </svg>{{ comment['score'] }}</p>
-                  <p>{{ comment['text'] }}</p>
-                </div>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
+        <!--END OF COMMENTS-->
     </body>
 </html>
