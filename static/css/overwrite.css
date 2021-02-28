@@ -7,6 +7,10 @@ body {
     background-color: rgb(255, 255, 255)!important;
 }
 
+.search-button {
+    margin-right: 5px;
+}
+
 .card.summary-post {
     margin-top: 5px;
     margin-bottom: 5px;

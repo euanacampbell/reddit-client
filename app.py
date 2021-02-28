@@ -31,7 +31,7 @@ def subreddit(subreddit):
 
     posts=reddit.get_subreddit(subreddit)
 
-    return render_template('index.html', posts=posts)
+    return render_template('index.html', posts=posts, subreddit=subreddit)
 
 @app.route('/r/<subreddit>/<post_id>')
 def post(subreddit, post_id):
@@ -39,7 +39,8 @@ def post(subreddit, post_id):
 
     post = reddit.get_post_data(post_id)
     comments = reddit.get_comments(post_id)
-    return render_template('post.html', post=post, comments=comments)
+    subreddit = post['subreddit']
+    return render_template('post.html', post=post, comments=comments, subreddit=subreddit)
 
 
 @app.route('/debug-sentry')
