@@ -6,17 +6,17 @@ app = Flask(__name__)
 
 reddit = reddit()
 
-@app.route('/home')
-def home():
-
-    posts=[]
-    return render_template('index.html', posts=posts)
+@app.route('/popular')
+def popular():
+    default='popular'
+    posts=reddit.get_subreddit(default)
+    return render_template('index.html', posts=posts, subreddit=default)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
     if request.data:
-        return redirect(url_for('home'))
+        return redirect(url_for('popular'))
     else:
         return render_template('login.html')
 
@@ -27,7 +27,6 @@ def subreddit(subreddit):
 
     posts=reddit.get_subreddit(subreddit)
 
-    posts=posts
     return render_template('index.html', posts=posts)
 
 @app.route('/r/<subreddit>/<post_id>')

@@ -65,23 +65,20 @@ class reddit():
         post['media_url']=submission.url
 
         if submission.url.endswith(('.jpg', '.png')):
-            print('IMAGE')
             post['media']={
                 'type': 'image',
                 'media_url': submission.url
             }
+        elif submission.url.startswith('https://www.reddit.com/r/'):
+            post['media']={
+                'type': 'none',
+                'link_url': submission.url
+            }
         else:
-            try:
-                print('LINK')
-                preview = link_preview(submission.url)
-                post['media']={
-                    'type': 'link',
-                    'media_url': preview.image,
-                    'link_title': preview.title,
-                    'link_url': submission.url
-                }
-            except:
-                pass
+            post['media']={
+                'type': 'link',
+                'link_url': submission.url
+            }
 
         return(post)
 
