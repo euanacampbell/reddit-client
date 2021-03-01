@@ -62,6 +62,11 @@ a.navbar-brand {
     padding-left: 5px;
 }
 
+.navbar-col {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 .card-footer {
     padding: 10px;
     background-color: rgb(255, 255, 255);

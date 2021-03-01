@@ -28,36 +28,38 @@
   <body>
       <!--NAV BAR-->
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="col-sm-6">
-          <a class="navbar-brand" href="/">REDDIT</a>
-        </div>
-        <div class="col-sm-6">
-          <div class="input-group">
-            <input id="subredditSearch" class="form-control me-2" type="search" placeholder="subreddit" aria-label="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-            <span class="input-group-btn">
-              <button onclick="goToSubreddit()" class="btn btn-dark search-button">GO</button>
-            </span>          
-          <!--
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-              </ul>
-              <form class="d-flex search">
-                <input class="form-control me-2" type="search" placeholder="subreddit" aria-label="Search">
-                <button class="btn btn-dark" type="submit" href="https://google.co.uk">GO</button>
-              </form>-->
+        <div class="row">
+          <div class="col-sm-6 navbar-col">
+            <a class="navbar-brand" href="/">REDDIT</a>
+          </div>
+          <div class="col-sm-6 navbar-col">
+            <div class="input-group">
+              <input id="subredditSearch" class="form-control me-2" type="search" placeholder="subreddit" aria-label="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+              <span class="input-group-btn">
+                <button onclick="goToSubreddit()" class="btn btn-dark search-button">GO</button>
+              </span>          
+            <!--
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <form class="d-flex search">
+                  <input class="form-control me-2" type="search" placeholder="subreddit" aria-label="Search">
+                  <button class="btn btn-dark" type="submit" href="https://google.co.uk">GO</button>
+                </form>-->
+            </div>
           </div>
         </div>
       </nav>
       <!--END OF NAV BAR-->
 
       <!--CARDS-->
-      <div class="row">
+      <div class="card-columns">
         {% for post in posts: %}
-          <div class="col-sm-6 col-lg-4 col-xl-3">
+          <!--<div class="col-sm-6 col-lg-4 col-xl-3">-->
             <!---<a href="https://google.co.uk" class="custom-card">-->
               <div class="card summary-post">
                 <div class="card-header">
@@ -123,7 +125,7 @@
                 </div>
               </div>
             <!---</a>-->
-          </div>
+          <!--</div>-->
         {% endfor %}
       </div>
   </body>
