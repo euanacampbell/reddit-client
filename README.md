@@ -21,20 +21,13 @@ export auth1=<reddit password>
 ```
 
 ## Usage
-Project can be accessed at [reddit.euan.app](https://reddit.euan.app)
+Project can be accessed at [https://reddit.euan.app](https://reddit.euan.app)
 
 ## Local Usage
 
 ```bash
 export FLASK_APP=app
-
+```
+```bash
 flask run
 ```
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
