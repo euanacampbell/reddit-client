@@ -1,8 +1,8 @@
 # Reddit Client
 
-Reddit Client is a web-based Reddit viewer allowing you to search and view subreddits, including their posts and comments.
+A web-based Reddit viewer allowing you to search and view subreddits, including their posts and comments.
 
-It utilises the Reddit API
+It utilises the Reddit API.
 
 ## Installation
 
