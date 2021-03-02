@@ -21,7 +21,7 @@ export auth1=<reddit password>
 ```
 
 ## Usage
-Project can be accessed at [https://reddit.euan.app](https://reddit.euan.app)
+Project can be accessed at [https://reddit.euan.app](https://reddit.euan.app).
 
 ## Local Usage
 
