@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      {% include '/components/header.html' %}
+  </head>
+  <body>
+      
+    <!-- NAV BAR -->
+      {% include '/components/nav_bar.html' %}
+
+      <!--CARDS-->
+      <div class="card-columns">
+        {% for post in posts: %}
+          {% include '/components/post/post.html' %}
+        {% endfor %}
+      </div>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+
+<div class="card summary-post img-rounded">
+    <div class="card-header">
+        <h5 class="card-title" style="margin-bottom: 0px;">{{ post['title'] }}</h5>
+        <!-- <p class="text-muted">in r/<a class='subreddit-link' href="/r/{{ post['subreddit'] }}">{{ post['subreddit'] }}</a> by {{ post['author'] }}</p> -->
+        <p class="text-muted"><a class='subreddit-link' href="/r/{{ post['subreddit'] }}">r/{{ post['subreddit'] }} </a><span class="badge badge-dark">⏱ 6h</span></p>
+    </div>
+    <div class="card-body">
+        <a href={{ post['post_url'] }} class="stretched-link"></a>
+        <p class="card-text">{{ post['text'] }}</p>
+        
+        <!--IMAGE-->
+        {% if  post.media.type=='image' %}
+        <img class="d-block w-100 p-2" src={{ post['media_url'] }}>
+        <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner p-2">
+            <div class="carousel-item active">
+            <img class="d-block w-100" src={{ post['media_url'] }} alt="First slide">
+            </div>
+        </div>
+        {% if  post['media_url'] | length > 1 %}
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+        </a>
+        {% endif %}
+        </div> -->
+        <!--END OF IMAGE-->
+
+        <!--LINK-->
+        {% elif  post.media.type=='link' %}
+        <p class="card-text">{{ post['text'] }}</p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card link-card flex-md-row mb-4 shadow-sm h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <a target="_blank" href="{{ post['media'].link_url }}"><strong class="d-inline-block mb-2 text-primary">{{ post['media'].link_domain }}</strong></a>
+                    <h6 class="mb-0">
+                        <a class="text-dark" href="{{ post['media'].link_url }}"></a>
+                    </h6>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!--END OF LINK-->
+    {% endif %}
+    </div>
+
+    <div class="card-footer post-footer text-muted">
+        <p>
+            <a href="#" class="badge badge-dark">{{ post['author'] }}</a>
+            <a href="#" class="badge badge-dark">•••</a>
+        </p>
+        <p> 
+            <span class="badge badge-dark">↑ {{ post['upvotes'] }} ↓</span>
+            <span class="badge badge-dark">{{ post['upvote_ratio']*100 }}%</span>
+            <span class="badge badge-dark">💬 {{ post['num_comments'] }}</span>
+            
+        </p>
+        
+    </div>
+</div>

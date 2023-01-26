@@ -14,7 +14,7 @@ def home():
 def popular():
     default='popular'
     posts=reddit.get_subreddit(default)
-    return render_template('index.html', posts=posts, subreddit=default)
+    return render_template('home.html', posts=posts, subreddit=default)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -31,7 +31,7 @@ def subreddit(subreddit):
 
     posts=reddit.get_subreddit(subreddit)
 
-    return render_template('index.html', posts=posts, subreddit=subreddit)
+    return render_template('home.html', posts=posts, subreddit=subreddit)
 
 @app.route('/r/<subreddit>/<post_id>')
 def post(subreddit, post_id):
@@ -41,6 +41,16 @@ def post(subreddit, post_id):
     comments = reddit.get_comments(post_id)
     subreddit = post['subreddit']
     return render_template('post.html', post=post, comments=comments, subreddit=subreddit)
+
+
+@app.route('/test')
+def test():
+
+
+    response = reddit.get_frontpage()
+
+    print(response)
+    
 
 
 @app.route('/debug-sentry')
